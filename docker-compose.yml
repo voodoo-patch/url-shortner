@@ -1,0 +1,13 @@
+version: "3.3"
+services:
+    
+    web:
+        build:
+            dockerfile: microservices/dockerfiles/DockerfileUrlShortner
+            context: ./
+        environment:
+            - ENVIRONMENT_OVERRIDE=docker
+            - ASPNETCORE_ENVIRONMENT=Development
+        ports:
+            - 5020:5020
+            
