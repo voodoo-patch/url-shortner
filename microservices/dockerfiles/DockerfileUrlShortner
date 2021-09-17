@@ -1,15 +1,13 @@
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
-COPY microservices/*.sln .
+# COPY microservices/*.sln .
 COPY microservices/UrlShortner/UrlShortner.csproj ./UrlShortner/UrlShortner.csproj
-COPY microservices/UrlShortnerTest/UrlShortnerTest.csproj ./UrlShortnerTest/UrlShortnerTest.csproj
-RUN dotnet restore
-COPY microservices/UrlShortner .
-COPY microservices/UrlShortnerTest .
+RUN dotnet restore UrlShortner
+COPY microservices/UrlShortner UrlShortner/
 
 RUN dotnet publish -c release -o /app UrlShortner/UrlShortner.csproj
 
 FROM mcr.microsoft.com/dotnet/aspnet:5.0
 WORKDIR /app
 COPY --from=build /app .
-ENTRYPOINT ["dotnet", "UrlShortner.dll"]
+ENTRYPOINT ["dotnet", "UrlShortner.dll", "--urls=http://0.0.0.0:5000"]

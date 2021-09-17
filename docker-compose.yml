@@ -9,5 +9,6 @@ services:
             - ENVIRONMENT_OVERRIDE=docker
             - ASPNETCORE_ENVIRONMENT=Development
         ports:
-            - 5020:5020
+          # HOST:CONTAINER
+            - 5020:5000
             
