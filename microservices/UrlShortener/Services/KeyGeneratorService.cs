@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace UrlShortner.Services
+namespace UrlShortener.Services
 {
     public class KeyGeneratorService : IKeyGeneratorService
     {

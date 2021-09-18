@@ -1,6 +1,6 @@
 using NUnit.Framework;
 
-namespace UrlShortnerTest
+namespace UrlShortenerTest
 {
     public class Tests
     {

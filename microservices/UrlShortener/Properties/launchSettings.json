@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "UrlShortner": {
+    "UrlShortener": {
       "commandName": "Project",
       "dotnetRunMessages": "true",
       "launchBrowser": true,

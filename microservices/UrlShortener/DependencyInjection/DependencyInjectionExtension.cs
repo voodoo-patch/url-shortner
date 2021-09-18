@@ -1,17 +1,17 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using UrlShortner.Repository;
-using UrlShortner.Services;
+using UrlShortener.Repository;
+using UrlShortener.Services;
 
-namespace UrlShortner.DependencyInjection
+namespace UrlShortener.DependencyInjection
 {    
     public static class DependencyInjectionExtensions
     {
         public static IServiceCollection AddServices(
              this IServiceCollection services)
         {
-            services.AddScoped<IShortnerService, ShortnerService>();
-            services.AddScoped<IShortnerRepository, ShortnerRepository>();
+            services.AddScoped<IShortenerService, ShortenerService>();
+            services.AddScoped<IShortenerRepository, ShortenerRepository>();
             services.AddScoped<IKeyGeneratorService, KeyGeneratorService>();
 
             return services;

@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrlShortner", "UrlShortner\UrlShortner.csproj", "{F95CB0CC-1D8C-4108-B117-975BC1A14C99}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrlShortener", "UrlShortener\UrlShortener.csproj", "{F95CB0CC-1D8C-4108-B117-975BC1A14C99}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrlShortnerTest", "UrlShortnerTest\UrlShortnerTest.csproj", "{5B0D14FB-6C0C-4915-90DF-09A982291F92}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrlShortenerTest", "UrlShortenerTest\UrlShortenerTest.csproj", "{5B0D14FB-6C0C-4915-90DF-09A982291F92}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeyGeneratorService", "KeyGeneratorService\KeyGeneratorService.csproj", "{FCE79E07-33F3-4B74-BD6A-9AA59F71A0D4}"
 EndProject

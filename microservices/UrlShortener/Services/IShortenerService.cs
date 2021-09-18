@@ -1,8 +1,8 @@
 using System.Threading.Tasks;
 
-namespace UrlShortner.Services
+namespace UrlShortener.Services
 {
-    public interface IShortnerService
+    public interface IShortenerService
     {
         Task<string> Shorten(string url);
     }

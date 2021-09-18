@@ -3,7 +3,7 @@ services:
     
     web:
         build:
-            dockerfile: microservices/dockerfiles/DockerfileUrlShortner
+            dockerfile: microservices/dockerfiles/DockerfileUrlShortener
             context: ./
         environment:
             - ENVIRONMENT_OVERRIDE=docker
@@ -11,4 +11,15 @@ services:
         ports:
           # HOST:CONTAINER
             - 5020:5000
+            
+    kgs:
+        build:
+            dockerfile: microservices/dockerfiles/DockerfileKeyGeneratorService
+            context: ./
+        environment:
+            - ENVIRONMENT_OVERRIDE=docker
+            - ASPNETCORE_ENVIRONMENT=Development
+        ports:
+          # HOST:CONTAINER
+            - 5021:5000
             

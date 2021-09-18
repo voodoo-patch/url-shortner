@@ -1,20 +1,20 @@
 using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
-using UrlShortner.Models;
-using UrlShortner.Repository;
+using UrlShortener.Models;
+using UrlShortener.Repository;
 
-namespace UrlShortner.Services
+namespace UrlShortener.Services
 {
-    public class ShortnerService : IShortnerService
+    public class ShortenerService : IShortenerService
     {
         private readonly IKeyGeneratorService keyGeneratorService;
-        private readonly IShortnerRepository shortnerRepository;
+        private readonly IShortenerRepository shortenerRepository;
 
-        public ShortnerService(IKeyGeneratorService keyGeneratorService, IShortnerRepository shortnerRepository)
+        public ShortenerService(IKeyGeneratorService keyGeneratorService, IShortenerRepository shortenerRepository)
         {
             this.keyGeneratorService = keyGeneratorService;
-            this.shortnerRepository = shortnerRepository;
+            this.shortenerRepository = shortenerRepository;
         }
 
         public async Task<string> Shorten(string url)
@@ -31,7 +31,7 @@ namespace UrlShortner.Services
             };
             try
             {
-                await this.shortnerRepository.AddEntry(entry);
+                await this.shortenerRepository.AddEntry(entry);
             }
             catch (Exception ex)
             {

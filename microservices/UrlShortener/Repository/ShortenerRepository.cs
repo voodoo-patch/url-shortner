@@ -1,9 +1,9 @@
 using System.Threading.Tasks;
-using UrlShortner.Models;
+using UrlShortener.Models;
 
-namespace UrlShortner.Repository
+namespace UrlShortener.Repository
 {
-    public class ShortnerRepository : IShortnerRepository
+    public class ShortenerRepository : IShortenerRepository
     {
         public Task<string> AddEntry(TinyUrlDTO entry)
         {

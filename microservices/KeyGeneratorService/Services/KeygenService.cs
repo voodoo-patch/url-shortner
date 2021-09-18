@@ -11,7 +11,8 @@ namespace KeyGeneratorService.Services
     public class KeygenService : BackgroundService
     {
         private readonly ILogger<KeygenService> _logger;
-        private const int INTERVAL = 500;
+        private const int INTERVAL = 1;
+        // in order to decrease collisions, `_` and `-` characters could be added to the dictionary
         private const string DICTIONARY = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
         private const int KEY_LENGTH = 8;
         private const int TRIALS = 1000000;
@@ -50,7 +51,8 @@ namespace KeyGeneratorService.Services
                         StatsSingletonService.IncreaseCollisionCounter();
                     }
 
-                    await Task.Delay(1);
+                    // used to guarantee web host to respond to stats calls
+                    await Task.Delay(INTERVAL);
                 }
 
             _logger.LogDebug($"KeygenService background task is stopping.");
