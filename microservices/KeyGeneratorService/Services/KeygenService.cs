@@ -30,7 +30,7 @@ namespace KeyGeneratorService.Services
             stoppingToken.Register(() =>
                 _logger.LogDebug($"KeygenService background task is stopping."));
             using (RNGCryptoServiceProvider rngCsp = new RNGCryptoServiceProvider())
-                while (!stoppingToken.IsCancellationRequested && StatsSingletonService.StatsInstance.Generated <= TRIALS)
+                while (!stoppingToken.IsCancellationRequested && StatsSingletonService.Generated <= TRIALS)
                 {
                     _logger.LogDebug($"KeygenService task doing background work.");
 

@@ -5,7 +5,8 @@ namespace KeyGeneratorService.Services
     public sealed class StatsSingletonService
     {
         private static readonly StatsSingletonService instance = new StatsSingletonService();
-        private static StatsDTO stats;
+        private static ulong generated { get; set; }
+        private static ulong collisions { get; set; }
         static object padlock = new object();
 
         // Explicit static constructor to tell C# compiler
@@ -16,24 +17,45 @@ namespace KeyGeneratorService.Services
 
         private StatsSingletonService()
         {
-            stats = new StatsDTO();
+            generated = 0;
+            collisions = 0;
         }
 
-        public static StatsDTO StatsInstance => stats;
-
-        public static long IncreaseCounter()
+        public static ulong Generated
         {
-            lock (padlock)
+            get
             {
-                return ++stats.Generated;
+                lock (padlock)
+                {
+                    return generated;
+                }
             }
         }
 
-        public static long IncreaseCollisionCounter()
+        public static ulong Collisions
+        {
+            get
+            {
+                lock (padlock)
+                {
+                    return collisions;
+                }
+            }
+        }
+
+        public static ulong IncreaseCounter()
         {
             lock (padlock)
             {
-                return ++stats.Collisions;
+                return ++generated;
+            }
+        }
+
+        public static ulong IncreaseCollisionCounter()
+        {
+            lock (padlock)
+            {
+                return ++collisions;
             }
         }
     }

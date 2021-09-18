@@ -13,7 +13,6 @@ namespace KeyGeneratorService.Controllers
     [Route("[controller]")]
     public class StatsController : ControllerBase
     {
-
         private readonly ILogger<StatsController> _logger;
         private readonly object statsService;
 
@@ -25,7 +24,12 @@ namespace KeyGeneratorService.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            return Ok(StatsSingletonService.StatsInstance);
+            var result = new StatsDTO()
+            {
+                Generated = StatsSingletonService.Generated,
+                Collisions = StatsSingletonService.Collisions
+            };
+            return Ok(result);
         }
     }
 }

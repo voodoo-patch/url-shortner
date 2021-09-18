@@ -2,8 +2,8 @@ namespace KeyGeneratorService.Models
 {
     public class StatsDTO
     {
-        public long Generated { get; set; }
-        public long Collisions { get; set; }
-        public long Valid => this.Generated - this.Collisions;
+        public ulong Generated { get; set; }
+        public ulong Collisions { get; set; }
+        public ulong Valid => this.Generated - this.Collisions;
     }
 }
