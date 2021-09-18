@@ -1,6 +1,28 @@
 version: "3.3"
 services:
     
+    keydb:
+        container_name: keydb
+        image: mongo
+        restart: always
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: root
+            MONGO_INITDB_ROOT_PASSWORD: example
+        # volumes:
+            # - ${WEBAPP_STORAGE_HOME}/site:/data/db
+        ports:
+            - 27017:27017
+
+    mongo-express:
+        image: mongo-express
+        restart: always
+        ports:
+            - 8081:8081
+        environment:
+            ME_CONFIG_MONGODB_ADMINUSERNAME: root
+            ME_CONFIG_MONGODB_ADMINPASSWORD: example
+            ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
+    
     web:
         build:
             dockerfile: microservices/dockerfiles/DockerfileUrlShortener
@@ -11,6 +33,8 @@ services:
         ports:
           # HOST:CONTAINER
             - 5020:5000
+        depends_on:
+            - keydb
             
     kgs:
         build:
@@ -22,4 +46,6 @@ services:
         ports:
           # HOST:CONTAINER
             - 5021:5000
+        depends_on:
+            - keydb
             
