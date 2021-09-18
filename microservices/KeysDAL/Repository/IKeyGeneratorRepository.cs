@@ -5,6 +5,7 @@ namespace KeysDAL.Repository
 {
     public interface IKeyGeneratorRepository
     {
+        Task AddFreshKey(FreshKey key);
         Task<FreshKey> GetFreshKey();
     }
 }

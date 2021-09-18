@@ -1,26 +1,34 @@
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using KeysDAL.Entities;
+using KeysDAL.Repository;
 using Microsoft.Extensions.Logging;
 
 namespace KeyGeneratorService.Services
 {
-
     public class KeygenService : BackgroundService
     {
         private readonly ILogger<KeygenService> _logger;
+
         private const int INTERVAL = 1;
+
         // in order to decrease collisions, `_` and `-` characters could be added to the dictionary
         private const string DICTIONARY = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
         private const int KEY_LENGTH = 8;
         private const int TRIALS = 1000000;
 
         HashSet<string> keys = new HashSet<string>();
-        public KeygenService(ILogger<KeygenService> logger)
+        private readonly IKeyGeneratorRepository keyGeneratorRepository;
+
+        public KeygenService(ILogger<KeygenService> logger, IKeyGeneratorRepository keyGeneratorRepository)
         {
             this._logger = logger;
+            this.keyGeneratorRepository = keyGeneratorRepository;
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -36,17 +44,19 @@ namespace KeyGeneratorService.Services
 
                     string key = this.GenerateKey(rngCsp);
 
-                    bool valid = true;
                     // save key into db if not present
 
                     // to replace with db save
-                    valid = keys.Add(key);
-
-                    if (valid)
+                    try
                     {
+                        var freshKey = new FreshKey()
+                        {
+                            Key = key
+                        };
+                        await this.keyGeneratorRepository.AddFreshKey(freshKey);
                         StatsSingletonService.IncreaseCounter();
                     }
-                    else
+                    catch (DuplicateNameException ex)
                     {
                         StatsSingletonService.IncreaseCollisionCounter();
                     }

@@ -1,3 +1,5 @@
+using System;
+using System.Data;
 using System.Threading.Tasks;
 using MongoDB.Driver;
 using KeysDAL.Configuration;
@@ -17,6 +19,18 @@ namespace KeysDAL.Repository
 
             this.freshKeys = database.GetCollection<FreshKey>(settings.FreshKeysCollectionName);
             this.takenKeys = database.GetCollection<TakenKey>(settings.TakenKeysCollectionName);
+        }
+
+        public async Task AddFreshKey(FreshKey key)
+        {
+            try
+            {
+                await this.freshKeys.InsertOneAsync(key);
+            }
+            catch (Exception ex)
+            {
+                throw new DuplicateNameException();
+            }
         }
 
         public async Task<FreshKey> GetFreshKey()
