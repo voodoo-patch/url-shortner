@@ -1,9 +1,8 @@
 using System;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using UrlShortener.Entities;
+using UrlsDAL.Entities;
+using UrlsDAL.Repository;
 using UrlShortener.Models;
-using UrlShortener.Repository;
 
 namespace UrlShortener.Services
 {

@@ -1,5 +1,4 @@
 using System.Threading.Tasks;
-using UrlShortener.Entities;
 using UrlShortener.Models;
 
 namespace UrlShortener.Services

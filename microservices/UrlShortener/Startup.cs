@@ -2,16 +2,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using KeysDAL.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using UrlsDAL.DependencyInjection;
 using UrlShortener.DependencyInjection;
-using UrlShortener.Services;
 
 namespace UrlShortener
 {
@@ -37,7 +36,10 @@ namespace UrlShortener
             });
 
             services.AddServices();
-            services.AddDatasource(Configuration);
+            services.AddUrlServices();
+            services.AddKeyServices();
+            services.AddUrlsDB(Configuration);
+            services.AddKeysDB(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

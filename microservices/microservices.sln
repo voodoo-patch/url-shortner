@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeyGeneratorService", "KeyG
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeysDAL", "KeysDAL\KeysDAL.csproj", "{76BFA5AE-2D33-49B2-8209-59D669D30DF1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrlsDAL", "UrlsDAL\UrlsDAL.csproj", "{8EBA3F8D-633C-49CB-9846-044BD0016873}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -72,5 +74,17 @@ Global
 		{76BFA5AE-2D33-49B2-8209-59D669D30DF1}.Release|x64.Build.0 = Release|Any CPU
 		{76BFA5AE-2D33-49B2-8209-59D669D30DF1}.Release|x86.ActiveCfg = Release|Any CPU
 		{76BFA5AE-2D33-49B2-8209-59D669D30DF1}.Release|x86.Build.0 = Release|Any CPU
+		{8EBA3F8D-633C-49CB-9846-044BD0016873}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EBA3F8D-633C-49CB-9846-044BD0016873}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EBA3F8D-633C-49CB-9846-044BD0016873}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{8EBA3F8D-633C-49CB-9846-044BD0016873}.Debug|x64.Build.0 = Debug|Any CPU
+		{8EBA3F8D-633C-49CB-9846-044BD0016873}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8EBA3F8D-633C-49CB-9846-044BD0016873}.Debug|x86.Build.0 = Debug|Any CPU
+		{8EBA3F8D-633C-49CB-9846-044BD0016873}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EBA3F8D-633C-49CB-9846-044BD0016873}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8EBA3F8D-633C-49CB-9846-044BD0016873}.Release|x64.ActiveCfg = Release|Any CPU
+		{8EBA3F8D-633C-49CB-9846-044BD0016873}.Release|x64.Build.0 = Release|Any CPU
+		{8EBA3F8D-633C-49CB-9846-044BD0016873}.Release|x86.ActiveCfg = Release|Any CPU
+		{8EBA3F8D-633C-49CB-9846-044BD0016873}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

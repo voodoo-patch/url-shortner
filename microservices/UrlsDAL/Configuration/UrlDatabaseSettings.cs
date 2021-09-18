@@ -1,4 +1,4 @@
-namespace UrlShortener.Configuration
+namespace UrlsDAL.Configuration
 {
     public class UrlDatabaseSettings : IUrlDatabaseSettings
     {

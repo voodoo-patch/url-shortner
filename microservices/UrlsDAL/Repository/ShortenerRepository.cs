@@ -1,11 +1,10 @@
 using System.Linq;
 using System.Threading.Tasks;
-using UrlShortener.Configuration;
-using UrlShortener.Models;
+using UrlsDAL.Configuration;
 using MongoDB.Driver;
-using UrlShortener.Entities;
+using UrlsDAL.Entities;
 
-namespace UrlShortener.Repository
+namespace UrlsDAL.Repository
 {
     public class ShortenerRepository : IShortenerRepository
     {

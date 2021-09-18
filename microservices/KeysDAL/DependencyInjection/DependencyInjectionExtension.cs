@@ -8,7 +8,7 @@ namespace KeysDAL.DependencyInjection
 {    
     public static class DependencyInjectionExtensions
     {
-        public static IServiceCollection AddRepository(
+        public static IServiceCollection AddKeyServices(
              this IServiceCollection services)
         {
             services.AddSingleton<IKeyGeneratorRepository, KeyGeneratorRepository>();

@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using UrlShortener.Repository;
+using KeysDAL.Repository;
 
 namespace UrlShortener.Services
 {

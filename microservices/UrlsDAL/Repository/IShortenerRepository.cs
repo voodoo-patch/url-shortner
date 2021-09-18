@@ -1,8 +1,7 @@
 using System.Threading.Tasks;
-using UrlShortener.Entities;
-using UrlShortener.Models;
+using UrlsDAL.Entities;
 
-namespace UrlShortener.Repository
+namespace UrlsDAL.Repository
 {
     public interface IShortenerRepository
     {

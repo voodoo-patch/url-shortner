@@ -2,7 +2,7 @@ using System;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace UrlShortener.Entities
+namespace UrlsDAL.Entities
 {
     public class TinyUrl
     {
