@@ -14,7 +14,6 @@ namespace KeyGeneratorService.Controllers
     public class StatsController : ControllerBase
     {
         private readonly ILogger<StatsController> _logger;
-        private readonly object statsService;
 
         public StatsController(ILogger<StatsController> logger)
         {

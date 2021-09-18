@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using UrlShortener.Entities;
 using UrlShortener.Models;
 using UrlShortener.Repository;
 
@@ -24,10 +25,14 @@ namespace UrlShortener.Services
             {
                 throw new ApplicationException("Fresh key unavailable");
             }
-            var entry = new TinyUrlDTO()
+
+            var entry = new TinyUrl()
             {
                 Id = key,
                 OriginalUrl = url,
+                ShortUrl = key,
+                ExpiresOn = null,
+                UserId = null
             };
             try
             {
@@ -39,6 +44,25 @@ namespace UrlShortener.Services
             }
 
             return key;
+        }
+
+        public async Task<TinyUrlDTO> GetUrl(string shortenedUrl)
+        {
+            TinyUrlDTO result = null;
+            var tinyUrl = await this.shortenerRepository.GetUrl(shortenedUrl);
+
+            if (tinyUrl != null)
+            {
+                result = new TinyUrlDTO()
+                {
+                    Id = tinyUrl.Id,
+                    OriginalUrl = tinyUrl.OriginalUrl,
+                    ShortUrl = tinyUrl.ShortUrl,
+                    UserId = tinyUrl.UserId,
+                };
+            }
+
+            return result;
         }
     }
 }

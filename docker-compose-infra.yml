@@ -24,6 +24,7 @@ services:
             ME_CONFIG_MONGODB_ADMINPASSWORD: example
             ME_CONFIG_MONGODB_SERVER: keydb
             ME_CONFIG_MONGODB_PORT: 27017
+            # ME_CONFIG_MONGODB_URL: mongodb://root:example@localhost:27017/
             
         depends_on:
             - keydb
@@ -51,34 +52,9 @@ services:
             ME_CONFIG_MONGODB_ADMINPASSWORD: example
             ME_CONFIG_MONGODB_SERVER: urldb
             ME_CONFIG_MONGODB_PORT: 27017
+            # ME_CONFIG_MONGODB_URL: mongodb://root:example@localhost:27017/
             
         depends_on:
             - urldb
     
-    web:
-        build:
-            dockerfile: microservices/dockerfiles/DockerfileUrlShortener
-            context: ./
-        environment:
-            - ENVIRONMENT_OVERRIDE=docker
-            - ASPNETCORE_ENVIRONMENT=Development
-        ports:
-            # HOST:CONTAINER
-            - 5020:5000
-        depends_on:
-            - keydb
-            - urldb
-            
-    kgs:
-        build:
-            dockerfile: microservices/dockerfiles/DockerfileKeyGeneratorService
-            context: ./
-        environment:
-            - ENVIRONMENT_OVERRIDE=docker
-            - ASPNETCORE_ENVIRONMENT=Development
-        ports:
-          # HOST:CONTAINER
-            - 5021:5000
-        depends_on:
-            - keydb
             

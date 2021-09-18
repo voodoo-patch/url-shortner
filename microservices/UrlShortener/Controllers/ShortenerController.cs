@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using UrlShortener.Entities;
+using UrlShortener.Models;
 using UrlShortener.Services;
 
 namespace UrlShortener.Controllers
@@ -21,12 +23,24 @@ namespace UrlShortener.Controllers
             this.shortenerService = shortenerService;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Get([FromQuery] string url)
+        [HttpPost]
+        public async Task<IActionResult> Post([FromQuery] string url)
         {
             string shortned = await this.shortenerService.Shorten(url);
-            
+
             return Ok(shortned);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Get([FromQuery] string key)
+        {
+            TinyUrlDTO tinyUrl = await this.shortenerService.GetUrl(key);
+            if (tinyUrl == null)
+            {
+                return NotFound();
+            }
+
+            return Redirect(tinyUrl.OriginalUrl);
         }
     }
 }

@@ -1,12 +1,22 @@
 using System.Threading.Tasks;
+using UrlShortener.Repository;
 
 namespace UrlShortener.Services
 {
     public class KeyGeneratorService : IKeyGeneratorService
     {
-        public Task<string> GetKey()
+        private readonly IKeyGeneratorRepository keyGeneratorRepository;
+
+        public KeyGeneratorService(IKeyGeneratorRepository keyGeneratorRepository)
         {
-            throw new System.NotImplementedException();
+            this.keyGeneratorRepository = keyGeneratorRepository;
+        }
+
+        public async Task<string> GetKey()
+        {
+            var freshKey = await this.keyGeneratorRepository.GetFreshKey();
+            
+            return freshKey?.Key;
         }
     }
 }
