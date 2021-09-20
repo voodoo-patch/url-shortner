@@ -2,7 +2,13 @@ FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
 # COPY microservices/*.sln .
 COPY microservices/UrlShortener/UrlShortener.csproj ./UrlShortener/UrlShortener.csproj
+COPY microservices/KeysDAL/KeysDAL.csproj ./KeysDAL/KeysDAL.csproj
+COPY microservices/UrlsDAL/UrlsDAL.csproj ./UrlsDAL/UrlsDAL.csproj
+RUN dotnet restore KeysDAL
+RUN dotnet restore UrlsDAL
 RUN dotnet restore UrlShortener
+COPY microservices/UrlsDAL UrlsDAL/
+COPY microservices/KeysDAL KeysDAL/
 COPY microservices/UrlShortener UrlShortener/
 
 RUN dotnet publish -c release -o /app UrlShortener/UrlShortener.csproj

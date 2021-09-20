@@ -2,8 +2,11 @@ FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
 # COPY microservices/*.sln .
 COPY microservices/KeyGeneratorService/KeyGeneratorService.csproj ./KeyGeneratorService/KeyGeneratorService.csproj
+COPY microservices/KeysDAL/KeysDAL.csproj ./KeysDAL/KeysDAL.csproj
+RUN dotnet restore KeysDAL
 RUN dotnet restore KeyGeneratorService
 COPY microservices/KeyGeneratorService KeyGeneratorService/
+COPY microservices/KeysDAL KeysDAL/
 
 RUN dotnet publish -c release -o /app KeyGeneratorService/KeyGeneratorService.csproj
 
