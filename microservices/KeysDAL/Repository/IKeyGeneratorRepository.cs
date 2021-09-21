@@ -7,5 +7,6 @@ namespace KeysDAL.Repository
     {
         Task AddFreshKey(FreshKey key);
         Task<FreshKey> GetFreshKey();
+        Task<long> CountFreshKeys();
     }
 }

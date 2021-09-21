@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using MongoDB.Driver;
 using KeysDAL.Configuration;
 using KeysDAL.Entities;
+using MongoDB.Bson;
 
 namespace KeysDAL.Repository
 {
@@ -46,6 +47,11 @@ namespace KeysDAL.Repository
             }
 
             return freshKey;
+        }
+
+        public async Task<long> CountFreshKeys()
+        {
+            return await this.freshKeys.CountDocumentsAsync(new BsonDocument());
         }
     }
 }

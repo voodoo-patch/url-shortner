@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -10,11 +11,12 @@ using UrlShortener.Services;
 namespace UrlShortener.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("")]
     public class ShortenerController : ControllerBase
     {
         private readonly ILogger<ShortenerController> _logger;
         private readonly IShortenerService shortenerService;
+        private readonly Regex httpSuffix = new Regex(@"^https?:\/\/");
 
         public ShortenerController(ILogger<ShortenerController> logger, IShortenerService shortenerService)
         {
@@ -25,13 +27,24 @@ namespace UrlShortener.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromQuery] string url)
         {
+            if (!string.IsNullOrEmpty(url) && !httpSuffix.IsMatch(url))
+            {
+                url = "http://" + url;
+            }
+
+            bool isUri = Uri.IsWellFormedUriString(url, UriKind.Absolute);
+            if (!isUri)
+            {
+                return BadRequest("Provided URL is not in a correct format");
+            }
+
             string shortned = await this.shortenerService.Shorten(url);
 
             return Ok(shortned);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Get([FromQuery] string key)
+        [HttpGet("{key}")]
+        public async Task<IActionResult> Get(string key)
         {
             TinyUrlDTO tinyUrl = await this.shortenerService.GetUrl(key);
             if (tinyUrl == null)
@@ -39,7 +52,13 @@ namespace UrlShortener.Controllers
                 return NotFound();
             }
 
-            return Redirect(tinyUrl.OriginalUrl);
+            string redirectUrl = tinyUrl.OriginalUrl;
+            if (!httpSuffix.IsMatch(redirectUrl))
+            {
+                redirectUrl = "http://" + redirectUrl;
+            }
+
+            return Redirect(redirectUrl);
         }
     }
 }

@@ -19,10 +19,10 @@ namespace KeyGeneratorService
     {
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            this.configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
+        public IConfiguration configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -33,10 +33,18 @@ namespace KeyGeneratorService
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "KeyGeneratorService", Version = "v1" });
             });
-
+            // services.AddLogging(configure => configure.AddConsole())
+            //     .Configure<LoggerFilterOptions>(options => options.MinLevel = LogLevel.Debug);
+            services.AddLogging(builder =>
+                builder
+                    .AddDebug()
+                    .AddConsole()
+                    .AddConfiguration(configuration.GetSection("Logging"))
+                    .SetMinimumLevel(LogLevel.Information)
+            );
             services.AddServices();
             services.AddKeyServices();
-            services.AddKeysDB(Configuration);
+            services.AddKeysDB(configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -27,7 +27,6 @@ namespace UrlShortener.Services
 
             var entry = new TinyUrl()
             {
-                Id = key,
                 OriginalUrl = url,
                 ShortUrl = key,
                 ExpiresOn = null,
