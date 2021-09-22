@@ -4,11 +4,15 @@
 
 First build the containers by running
 
-`$ docker-compose build`
+```bash
+docker-compose build
+```
 
 Then run the following commmand
 
-`$ docker-compose up`
+```bash
+docker-compose up
+```
 
 The following containers will be created and run:
 
