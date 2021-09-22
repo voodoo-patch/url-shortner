@@ -8,6 +8,7 @@
             v-model="form.url"
             type="text"
             placeholder="Enter URL"
+            :readonly="!!shortenedUrl"
             required
           ></b-form-input>
         </b-form-group>
