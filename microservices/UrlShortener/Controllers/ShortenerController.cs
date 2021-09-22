@@ -27,13 +27,7 @@ namespace UrlShortener.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromQuery] string url)
         {
-            if (!string.IsNullOrEmpty(url) && !httpSuffix.IsMatch(url))
-            {
-                url = "http://" + url;
-            }
-
-            bool isUri = Uri.IsWellFormedUriString(url, UriKind.Absolute);
-            if (!isUri)
+            if (!IsUrlValid(url))
             {
                 return BadRequest("Provided URL is not in a correct format");
             }
@@ -59,6 +53,16 @@ namespace UrlShortener.Controllers
             }
 
             return Redirect(redirectUrl);
+        }
+
+        public bool IsUrlValid(string source)
+        {
+            if (!string.IsNullOrEmpty(source) && !httpSuffix.IsMatch(source))
+            {
+                source = "http://" + source;
+            }
+            Uri uriResult;
+            return Uri.TryCreate(source, UriKind.Absolute, out uriResult);
         }
     }
 }

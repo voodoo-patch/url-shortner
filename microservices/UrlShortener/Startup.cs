@@ -26,7 +26,17 @@ namespace UrlShortener
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: "_myAllowSpecificOrigins",
+                    builder =>
+                    {
+                        builder
+                            .AllowAnyOrigin()
+                            .AllowAnyMethod()
+                            .AllowAnyHeader();
+                    });
+            });
             services.AddControllers()
                 .AddNewtonsoftJson(options => options.UseMemberCasing());
             
@@ -51,6 +61,7 @@ namespace UrlShortener
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "UrlShortener v1"));
             }
+            app.UseCors("_myAllowSpecificOrigins");
 
             app.UseRouting();
 
