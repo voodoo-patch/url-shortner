@@ -73,3 +73,13 @@ services:
         depends_on:
             - keydb
             
+    frontend:
+        build:
+            dockerfile: microservices/dockerfiles/DockerfileFrontend
+            context: ./
+        ports:
+            - "8080:8080"
+        container_name: frontend
+        volumes:
+            - ./frontend:/usr/src/app/frontend
+            - /usr/src/app/frontend/node_modules
