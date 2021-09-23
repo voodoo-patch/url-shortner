@@ -26,7 +26,23 @@ namespace KeysDAL.Repository
         {
             try
             {
+                if (await IsKeyAlreadyTaken(key))
+                {
+                    throw new DuplicateNameException("Key already taken");
+                }
                 await this.freshKeys.InsertOneAsync(key);
+            }
+            catch (Exception ex)
+            {
+                throw new DuplicateNameException();
+            }
+        }
+        private async Task<bool> IsKeyAlreadyTaken(FreshKey key)
+        {
+            try
+            {
+                var taken = await this.takenKeys.FindAsync(k => k.Key == key.Key);
+                return taken.Any();
             }
             catch (Exception ex)
             {
